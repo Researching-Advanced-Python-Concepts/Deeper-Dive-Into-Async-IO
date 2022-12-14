@@ -9,6 +9,7 @@
 - **Concurrency** is a slightly broader term than parallelism. It suggests that multiple tasks have the ability to run in an overlapping manner.
 - **Threading** is a concurrent execution model whereby multiple threads take turns executing tasks. Used for I/O bound tasks like waiting for response from a web request.
 - **a coroutine** is a function that can suspend its execution before reaching return, and it can indirectly pass control to another coroutine for some time.
+- **event loop** can be thought of as something like a while True loop that monitors coroutines, taking feedback on what’s idle, and looking around for things that can be executed in the meantime. It is able to wake up an idle coroutine when whatever that coroutine is waiting on becomes available.
 
 ## Working of await
 
