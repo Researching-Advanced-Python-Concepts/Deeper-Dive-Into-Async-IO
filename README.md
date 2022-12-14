@@ -1,3 +1,26 @@
 # Deeper-Dive-Into-Async-IO
 
 [Following](https://realpython.com/async-io-python/)
+
+## Keywords
+
+- **Parallelism** consists of performing multiple operations at the same time.
+- **Multiprocessing** is a means to effect parallelism, and it entails spreading tasks over a computer’s central processing units (CPUs, or cores). Best for CPU bound tasks like heavy calculations
+- **Concurrency** is a slightly broader term than parallelism. It suggests that multiple tasks have the ability to run in an overlapping manner.
+- **Threading** is a concurrent execution model whereby multiple threads take turns executing tasks. Used for I/O bound tasks like waiting for response from a web request.
+- **a coroutine** is a function that can suspend its execution before reaching return, and it can indirectly pass control to another coroutine for some time.
+
+## Working of await
+
+- If Python encounters an `await f()` expression in the scope of `g()`, this is how await tells the event loop, “Suspend execution of g() until whatever I’m waiting on—the result of f()—is returned. In the meantime, go let something else run.”
+
+    ```py
+    async def g():
+        # Pause here and come back to g() when f() is ready
+        r = await f()
+        return r
+    ```
+
+- to call await the object must either be
+    1. another coroutine
+    2. an object defining an `.__await__()` dunder method that returns an iterator
