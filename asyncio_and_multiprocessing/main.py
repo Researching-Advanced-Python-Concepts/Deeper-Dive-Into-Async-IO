@@ -15,7 +15,7 @@ def fetch_all(urls):
         target=bootstrap,
         args=(tx, rx)
     ).start()
-    
+
     for url in urls:
         task = fetch_url, (url,), {}
         # put an item into the queue without blocking
