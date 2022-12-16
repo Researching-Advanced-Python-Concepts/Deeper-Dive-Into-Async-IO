@@ -86,6 +86,7 @@ async def bulk_crawl_and_write(file: IO, urls:set, **kwargs) -> None:
     async with ClientSession() as session:
         tasks = []
         for url in urls:
+            # await write_one(file=file, url=url, session=session, **kwargs)
             tasks.append(
                 write_one(file=file, url=url, session=session, **kwargs)
             )
@@ -106,6 +107,11 @@ if __name__ == "__main__":
     with open(outpath, "w") as outfile:
         outfile.write("source_url\tparsed_url\n")
     
+    import time
+    start = time.perf_counter()
     asyncio.run(bulk_crawl_and_write(file=outpath, urls=urls))
-    
+    duration = time.perf_counter() - start
+    print(f"It took {duration} seconds")
+    # It took 0.9647995589998573 seconds
+    # without gather takes 3.8353376530003516 seconds
     
