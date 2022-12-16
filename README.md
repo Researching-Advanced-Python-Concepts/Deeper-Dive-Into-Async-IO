@@ -25,3 +25,11 @@
 - to call await the object must either be
     1. another coroutine
     2. an object defining an `.__await__()` dunder method that returns an iterator
+
+
+## Things to look into for further improvement
+
+- if parse was heavy or more intensive process we might want to consider running that in its own process with `loop.run_in_executor()`
+- Default `ClientSession` has an adapter with a maximum of 100 open connections. To change that, we can pass `asyncio.connector.TCPConnector` to `ClientSession`. we can also specify limits on a per-host basis.
+- specify timeouts for both session as a whole and for individual requests
+- To make webcrawler recursive we can use `aio-redis` to keep track of which URLs have been crawled within the tree to avoid requesting them twice, and connect links with Python's networkx library
